@@ -15,20 +15,20 @@ module StudentGrades
 
   class << self
     attr_accessor :class_scores_path, :grade_report_path
-  end
 
-  def self.all_reports
-    Pathname.new(@class_scores_path).each_child do |path|
-      next if path.basename.to_s.match(/^\./) || path.directory?
-      report_for(path)
+    def all_reports
+      Pathname.new(@class_scores_path).each_child do |path|
+        next if path.basename.to_s.match(/^\./) || path.directory?
+        report_for(path)
+      end
     end
-  end
 
-  def self.report_for(path)
-    report      = Report.new(path).build
-    output_path = PathBuilder.path_for(report.class_name)
+    def report_for(path)
+      report      = Report.new(path).build
+      output_path = PathBuilder.path_for(report.class_name)
 
-    ReportWriter.new(report.data, output_path).write
+      ReportWriter.new(report.data, output_path).write
+    end
   end
 
 end

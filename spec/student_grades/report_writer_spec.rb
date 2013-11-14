@@ -8,6 +8,8 @@ describe StudentGrades::ReportWriter do
 
   subject(:writer) { StudentGrades::ReportWriter.new(data, output_path) }
 
+  after { FileUtils.rm_rf(StudentGrades.grade_report_path) }
+
   describe '#write' do
     it 'writes the contents to file' do
       writer.write

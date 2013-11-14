@@ -24,7 +24,7 @@ describe StudentGrades do
     it 'creates a report for each class data file' do
       StudentGrades.all_reports
 
-      expect(File.exists?(class2_grades)).to be_true
+      expect(File.exists?(class2_grades)).to be true
     end
   end
 end
